@@ -55,7 +55,8 @@ class MarkdownEditor extends InputWidget
         } else {
             $textarea = Html::textArea($this->name, $this->value, $this->options);
         }
-        MarkdownEditorAsset::register($this->view);
+        $assets = MarkdownEditorAsset::register($this->view);
+        $this->clientOptions['path'] = new JsExpression("'{$assets->baseUrl}/lib/'");
         $options = empty ($this->clientOptions) ? '' : Json::htmlEncode($this->clientOptions);
         $varName = Inflector::classify('editor' . $this->id);
         $this->view->registerJs("var editor{$this->id} = new editormd(\"{$varName}\", {$options});");
