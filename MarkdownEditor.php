@@ -41,6 +41,7 @@ class MarkdownEditor extends InputWidget
         $this->clientOptions = array_merge([
             'width' => "100%",
             'height' => 380,
+            'watch' => false,
             'autoFocus' => false
         ], $this->clientOptions);
     }
