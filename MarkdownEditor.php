@@ -28,8 +28,6 @@ class MarkdownEditor extends InputWidget
      */
     public $clientOptions = [];
 
-    public $imageUpload  = false;
-
     /**
      * {@inheritDoc}
      * @see \yii\base\Object::init()
@@ -45,15 +43,11 @@ class MarkdownEditor extends InputWidget
             'width' => "100%",
             'height' => 380,
             'watch' => false,
+            'imageUpload' => false,
+            'imageFormats' => ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            'imageUploadURL' => Url::to(['/attachment/upload/editor-md']),
             'autoFocus' => false
         ], $this->clientOptions);
-        if($this->imageUpload){
-            $this->clientOptions = array_merge([
-                'imageUpload' => true,
-                'imageFormats' => ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                'imageUploadURL' => Url::to(['/attachment/upload/editor-md']),
-            ], $this->clientOptions);
-        }
     }
 
     /**
