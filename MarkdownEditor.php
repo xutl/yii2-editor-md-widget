@@ -7,6 +7,7 @@
 namespace xutl\editormd;
 
 use Yii;
+use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
@@ -27,9 +28,11 @@ class MarkdownEditor extends InputWidget
      */
     public $clientOptions = [];
 
+    public $imageUpload  = false;
+
     /**
      * {@inheritDoc}
-     * @see \Leaps\Base\Object::init()
+     * @see \yii\base\Object::init()
      */
     public function init()
     {
@@ -44,6 +47,13 @@ class MarkdownEditor extends InputWidget
             'watch' => false,
             'autoFocus' => false
         ], $this->clientOptions);
+        if($this->imageUpload){
+            $this->clientOptions = array_merge([
+                'imageUpload' => true,
+                'imageFormats' => ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                'imageUploadURL' => Url::to(['/attachment/upload/editor-md']),
+            ], $this->clientOptions);
+        }
     }
 
     /**
