@@ -43,7 +43,7 @@ class MarkdownAction extends Action
         $fieldName = $this->inputName;
         $config = [
             'maxFiles' => 1,
-            'extensions' => $this->getModule()->imageAllowFiles,
+            'extensions' => Yii::$app->settings->get('imageAllowFiles', 'attachment'),
             'checkExtensionByMimeType' => true,
             'mimeTypes' => 'image/*',
             "maxSize" => $this->getModule()->getMaxUploadByte(),
