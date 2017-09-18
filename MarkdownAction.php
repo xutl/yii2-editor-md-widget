@@ -9,7 +9,7 @@ namespace xutl\editormd;
 use Yii;
 use yii\base\Action;
 use yii\helpers\Json;
-use yuncms\attachment\ModuleTrait;
+use yuncms\attachment\AttachmentTrait;
 use yuncms\attachment\components\Uploader;
 
 /**
@@ -17,7 +17,7 @@ use yuncms\attachment\components\Uploader;
  */
 class MarkdownAction extends Action
 {
-    use ModuleTrait;
+    use AttachmentTrait;
 
     /**
      * @var string file input name.
@@ -43,10 +43,10 @@ class MarkdownAction extends Action
         $fieldName = $this->inputName;
         $config = [
             'maxFiles' => 1,
-            'extensions' => Yii::$app->settings->get('imageAllowFiles', 'attachment'),
+            'extensions' => $this->getSetting('imageAllowFiles'),
             'checkExtensionByMimeType' => true,
             'mimeTypes' => 'image/*',
-            "maxSize" => $this->getModule()->getMaxUploadByte(),
+            "maxSize" => $this->getMaxUploadByte(),
         ];
         $uploader = new Uploader([
             'fileField' => $fieldName,
